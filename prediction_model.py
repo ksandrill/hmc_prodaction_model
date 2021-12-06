@@ -15,7 +15,7 @@ SERIES_SIZE = 6
 MONTH_PERIOD = 4
 
 
-def predict(predict_model: Callable[[torch.tensor], torch.tensor], week_distribution: np.array) -> np.array:
+def predict(predict_model: Callable[[torch.tensor], torch.tensor], week_distribution: np.ndarray) -> np.ndarray:
     scaler = MinMaxScaler(feature_range=(0, 1))
     prep_input = scaler.fit_transform(week_distribution)
     tensor_input = torch.tensor(prep_input.astype(np.float32)).unsqueeze(0)
@@ -24,8 +24,8 @@ def predict(predict_model: Callable[[torch.tensor], torch.tensor], week_distribu
     return scaler.inverse_transform(output.numpy())
 
 
-def predict_on_period(predict_model: Callable[[torch.tensor], torch.tensor], week_distribution: np.array,
-                      series_size: int = SERIES_SIZE, period_len: int = MONTH_PERIOD) -> np.array:
+def predict_on_period(predict_model: Callable[[torch.tensor], torch.tensor], week_distribution: np.ndarray,
+                      series_size: int = SERIES_SIZE, period_len: int = MONTH_PERIOD) -> np.ndarray:
     model_input_buffer = np.zeros(shape=(week_distribution.shape[0] + period_len, week_distribution.shape[1]))
     model_input_buffer[0:series_size] = week_distribution
     for i in range(0, period_len):
@@ -48,16 +48,16 @@ class PredictionModel:
         self.item_prediction_model.load_state_dict(torch.load(item_model_path))
         self.item_prediction_model.eval()
 
-    def predict_next_week_sum_distribution(self, week_sum_distribution: np.array) -> np.array:
+    def predict_next_week_sum_distribution(self, week_sum_distribution: np.ndarray) -> np.ndarray:
         return predict(predict_model=self.sum_prediction_model, week_distribution=week_sum_distribution).squeeze()
 
-    def predict_next_week_item_distribution(self, week_item_distribution: np.array) -> np.array:
+    def predict_next_week_item_distribution(self, week_item_distribution: np.ndarray) -> np.ndarray:
         return np.floor(
             predict(predict_model=self.item_prediction_model, week_distribution=week_item_distribution)).squeeze()
 
-    def predict_next_month_sum_distribution(self, week_sum_distribution: np.array) -> np.array:
+    def predict_next_month_sum_distribution(self, week_sum_distribution: np.ndarray) -> np.ndarray:
         return predict_on_period(predict_model=self.sum_prediction_model, week_distribution=week_sum_distribution)
 
-    def predict_next_month_item_distribution(self, week_item_distribution: np.array) -> np.array:
+    def predict_next_month_item_distribution(self, week_item_distribution: np.ndarray) -> np.ndarray:
         return predict_on_period(predict_model=self.predict_next_week_item_distribution,
                                  week_distribution=week_item_distribution)

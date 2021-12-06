@@ -15,38 +15,38 @@ example.py  содержит пример работы с PredictionModel
 
 
 ```
-predict_next_week_sum_distribution(week_sum_distribution: np.array) -> np.array
+predict_next_week_sum_distribution(week_sum_distribution: np.ndarray) -> np.ndarray
 ```
 
-**вход**: week_sum_distribution: np.array размерности 6 x 29, каждая строка которого содержит распределение
+**вход**: week_sum_distribution: np.ndarray размерности 6 x 29, каждая строка которого содержит распределение
 сумм,потраченных на каждую из категорий
 
 **выход**: np.array размерности 29 - распределение сумм, потраченных на каждую категорию в предсказанную неделю
 
 ```
-predict_next_week_item_distribution(week_item_distribution: np.array) -> np.array
+predict_next_week_item_distribution(week_item_distribution: np.ndarray) -> np.ndarray
 ```
 
-**вход**: week_item_distribution: np.array размерности 6 x 29, каждая строка которого содержит распределение количества
+**вход**: week_item_distribution: np.ndarray размерности 6 x 29, каждая строка которого содержит распределение количества
 предметов,купленных в каждой из категорий
 
-**выход**: np.array размерности 29 - распределение количества предметов, купленных в каждой категории в предсказанную
+**выход**: np.ndarray размерности 29 - распределение количества предметов, купленных в каждой категории в предсказанную
 неделю
 
 ```
-predict_next_month_sum_distribution(self, week_sum_distribution: np.array) -> np.array:
+predict_next_month_sum_distribution(self, week_sum_distribution: np.ndarray) -> np.ndarray:
 ```
 
-**вход**: week_sum_distribution: np.array размерности 6 x 29, каждая строка которого содержит распределение
+**вход**: week_sum_distribution: np.ndarray размерности 6 x 29, каждая строка которого содержит распределение
 сумм,потраченных на каждую из категорий
 
-**выход**: np.array размерности 4 * 29 - распределение сумм, потраченных на каждую категорию в каждую неделю месяца ( в
+**выход**: np.ndarray размерности 4 * 29 - распределение сумм, потраченных на каждую категорию в каждую неделю месяца ( в
 месяце 4 недели)
 
 ```
-predict_next_month_item_distribution(self, week_item_distribution: np.array) -> np.array:
+predict_next_month_item_distribution(self, week_item_distribution: np.ndarray) -> np.ndarray:
 ```
-**вход**:week_item_distribution: np.array размерности 6 x 29, каждая строка которого содержит распределение количества
+**вход**:week_item_distribution: np.ndarray размерности 6 x 29, каждая строка которого содержит распределение количества
 предметов,купленных в каждой из категорий
 
 **выход**: np.array размерности 4 * 29 - распределение предметов , купленных в  каждойкатегории в каждую неделю месяца ( в
