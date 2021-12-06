@@ -1,4 +1,4 @@
-# hmc_prodction_model - это итоговая модель для микросервиса предсказаний по курсу КРПО,проект "home money control"
+# hmc_production_model - это итоговая модель для микросервиса предсказаний по курсу КРПО,проект "home money control"
 
 lstm_model.py содержит класс с архитектурой нейронной сети(используется только в prediction_model.py)
 
