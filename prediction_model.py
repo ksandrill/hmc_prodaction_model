@@ -59,5 +59,5 @@ class PredictionModel:
         return predict_on_period(predict_model=self.sum_prediction_model, week_distribution=week_sum_distribution)
 
     def predict_next_month_item_distribution(self, week_item_distribution: np.ndarray) -> np.ndarray:
-        return predict_on_period(predict_model=self.predict_next_week_item_distribution,
+        return predict_on_period(predict_model=self.item_prediction_model,
                                  week_distribution=week_item_distribution)
