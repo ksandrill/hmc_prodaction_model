@@ -31,7 +31,7 @@ def predict_on_period(predict_model: Callable[[torch.tensor], torch.tensor], wee
     for i in range(0, period_len):
         output = predict(predict_model, model_input_buffer[i:i + series_size - 1]).squeeze()
         model_input_buffer[i + series_size] = output
-    prediction = model_input_buffer[-period_len - 1: -1]
+    prediction = model_input_buffer[-period_len::]
     return prediction
 
 
